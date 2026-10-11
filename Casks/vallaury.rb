@@ -2,8 +2,8 @@ cask "vallaury" do
   version "0.1.2"
   sha256 "e757484cd1f4befd29f7eb592540620ad7f19d43a1f295b5bd216df2c711b03c"
 
-  url "https://github.com/sappafrancesco/vallaury-desktop/releases/download/v#{version}/Vallaury-#{version}-mac-universal.dmg",
-      verified: "github.com/sappafrancesco/vallaury-desktop/"
+  url "https://github.com/Vallaury/vallaury-desktop/releases/download/v#{version}/Vallaury-#{version}-mac-universal.dmg",
+      verified: "github.com/Vallaury/vallaury-desktop/"
   name "Vallaury"
   desc "Timetable, tasks, notes and school notifications"
   homepage "https://vallaury.it/"
