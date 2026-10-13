@@ -1,6 +1,6 @@
 cask "vallaury" do
-  version "0.1.2"
-  sha256 "e757484cd1f4befd29f7eb592540620ad7f19d43a1f295b5bd216df2c711b03c"
+  version "0.1.3"
+  sha256 "38e24da60e440c470a39c6dd018cf189c4bf86babf291ec2b81902a196f43f6a"
 
   url "https://github.com/Vallaury/vallaury-desktop/releases/download/v#{version}/Vallaury-#{version}-mac-universal.dmg",
       verified: "github.com/Vallaury/vallaury-desktop/"

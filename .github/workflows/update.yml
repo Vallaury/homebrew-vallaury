@@ -1,9 +1,7 @@
 name: Update cask
 
-# Follows the latest release of the app: new version and checksum. Runs every day, or by hand.
+# Follows the latest release of the app: new version and checksum. Run by hand until the Actions app may push to main (see the ruleset), then add a daily schedule back.
 on:
-  schedule:
-    - cron: "43 5 * * *"
   workflow_dispatch:
 
 permissions:
