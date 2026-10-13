@@ -1,0 +1,33 @@
+name: Update cask
+
+# Follows the latest release of the app: new version and checksum. Runs every day, or by hand.
+on:
+  schedule:
+    - cron: "43 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Update to the latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=$(gh release view --repo Vallaury/vallaury-desktop --json tagName -q .tagName)
+          v=${tag#v}
+          file=Casks/vallaury.rb
+          if grep -q "^  version \"$v\"" "$file"; then echo "Already at $v"; exit 0; fi
+          curl -fsSL "https://github.com/Vallaury/vallaury-desktop/releases/download/$tag/SHA256SUMS" -o sums
+          sha=$(awk -v f="Vallaury-$v-mac-universal.dmg" '$2 == f { print $1 }' sums | head -n 1)
+          test -n "$sha"
+          sed -i -E "s/^  version \".*\"/  version \"$v\"/; s/^  sha256 \".*\"/  sha256 \"$sha\"/" "$file"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Vallaury $v"
+          git push
